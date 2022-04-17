@@ -1,0 +1,14 @@
+{
+    "files.autoSave": "onFocusChange",
+    "editor.rulers": [
+        80
+    ],
+    "files.associations": {
+        "core.h": "c",
+        "__bit_reference": "c",
+        "__split_buffer": "c",
+        "vector": "c",
+        "string": "c",
+        "util.h": "c"
+    }
+}
