@@ -16,7 +16,7 @@ endif()
 
 include_directories(
     ${CMAKE_CURRENT_SOURCE_DIR}/includes
-    ${CMAKE_CURRENT_SOURCE_DIR}/minilibx
+    ${CMAKE_CURRENT_SOURCE_DIR}/mlx
 )
 
 add_executable(cub2d
@@ -25,6 +25,7 @@ add_executable(cub2d
     render.c
     cubparse.c
     util.c
+    line.c
 )
 
 add_executable(cub3d
@@ -33,30 +34,31 @@ add_executable(cub3d
     render.c
     cubparse.c
     util.c
+    line.c
 )
 
 target_link_libraries(cub2d
-    ${CMAKE_CURRENT_SOURCE_DIR}/minilibx/libmlx.a
+    ${CMAKE_CURRENT_SOURCE_DIR}/mlx/libmlx.a
     ${APPKIT}
     ${OPENGL}
 )
 
 add_custom_command(TARGET cub2d PRE_BUILD
-    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/minilibx
+    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/mlx
     COMMAND make
-    COMMENT "Building minilibx..."
+    COMMENT "Building mlx..."
 )
 
 target_link_libraries(cub3d
-    ${CMAKE_CURRENT_SOURCE_DIR}/minilibx/libmlx.a
+    ${CMAKE_CURRENT_SOURCE_DIR}/mlx/libmlx.a
     ${APPKIT}
     ${OPENGL}
 )
 
 add_custom_command(TARGET cub3d PRE_BUILD
-    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/minilibx
+    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/mlx
     COMMAND make
-    COMMENT "Building minilibx..."
+    COMMENT "Building mlx..."
 )
 
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})

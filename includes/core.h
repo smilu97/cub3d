@@ -13,16 +13,6 @@
 
 /** structs **/
 
-typedef struct s_fvec2 {
-    float x;
-    float y;
-} t_fvec2;
-
-typedef struct s_ivec2 {
-    int x;
-    int y;
-} t_ivec2;
-
 typedef struct s_ray {
     t_fvec2 origin;
     float angle; // radian

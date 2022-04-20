@@ -3,6 +3,89 @@
 void ensure_string_capacity(t_string *s, int dst_capacity);
 void ensure_arraylist_capacity(t_arraylist *array, int dst_capacity);
 
+t_ivec2 make_ivec2(int x, int y) {
+    t_ivec2 r;
+    r.x = x;
+    r.y = y;
+    return r;
+}
+
+t_fvec2 make_fvec2(float x, float y) {
+    t_fvec2 r;
+    r.x = x;
+    r.y = y;
+    return r;
+}
+
+t_fvec4 color_to_fvec4(int color) {
+    t_fvec4 r;
+    r.x = ((float) ((color >> 24) & 0xFF)) / 255.0f;
+    r.y = ((float) ((color >> 16) & 0xFF)) / 255.0f;
+    r.z = ((float) ((color >>  8) & 0xFF)) / 255.0f;
+    r.w = ((float) ((color >>  0) & 0xFF)) / 255.0f;
+    return r;
+}
+
+t_fvec4 add_fvec4(t_fvec4 v1, t_fvec4 v2) {
+    t_fvec4 r;
+    r.x = v1.x + v2.x;
+    r.y = v1.y + v2.y;
+    r.z = v1.z + v2.z;
+    r.w = v1.w + v2.w;
+    return r;
+}
+
+t_fvec2 sub_fvec2(t_fvec2 v1, t_fvec2 v2) {
+    t_fvec2 r;
+    r.x = v1.x - v2.x;
+    r.y = v1.y - v2.y;
+    return r;
+}
+
+t_fvec4 mul_fvec4_f(t_fvec4 v, float f) {
+    t_fvec4 r;
+    r.x = v.x * f;
+    r.y = v.y * f;
+    r.z = v.z * f;
+    r.w = v.w * f;
+    return r;
+}
+
+t_fvec4 interpolate_fvec4(t_fvec4 v1, t_fvec4 v2, float w) {
+    // v1 * (1-w) + v2 * w;
+    return add_fvec4(mul_fvec4_f(v1, 1-w), mul_fvec4_f(v2, w));
+}
+
+float distance_fvec2(t_fvec2 v) {
+    return sqrtf(v.x*v.x + v.y*v.y);
+}
+
+float rev_interpolate_fvec2(t_fvec2 t, t_fvec2 p1, t_fvec2 p2) {
+    t  = sub_fvec2(t , p1);
+    p2 = sub_fvec2(p2, p1);
+    if (fabsf(p2.x) > 0.0001f)
+        return t.x / p2.x;
+    return t.y / p2.y;
+}
+
+int fvec4_to_color(t_fvec4 v) {
+    int t = (((int) (v.x * 255.0f)) & 0xFF) << 24;
+    int r = (((int) (v.y * 255.0f)) & 0xFF) << 16;
+    int g = (((int) (v.z * 255.0f)) & 0xFF) <<  8;
+    int b = (((int) (v.w * 255.0f)) & 0xFF) <<  0;
+    return t | r | g | b;
+}
+
+void swap_fvec2(t_fvec2 *p1, t_fvec2 *p2) {
+    float tmp;
+    tmp = p1->x;
+    p1->x = p2->x;
+    p2->x = tmp;
+    tmp = p1->y;
+    p1->y = p2->y;
+    p2->y = tmp;
+}
+
 int max2i(int a, int b) {
     return a - ((a-b) & (a-b)>>31);
 }

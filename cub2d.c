@@ -5,19 +5,12 @@ int main(int argc, char** argv) {
 		printf("syntax: %s cubfile\n", argv[0]);
 		return -1;
 	}
-
-	int fd = open(argv[1], O_RDONLY);
-	t_cubfile *cub = read_cubfile(fd);
-	close(fd);
-	if (cub) {
-		debug_print_cubfile(cub);
-	}
-	destroy_cubfile(&cub);
 	
-    // void *mlx;
-	// void *mlx_win;
+    t_env env = make_env(500, 500, "Test");
 
-	// mlx = mlx_init();
-	// mlx_win = mlx_new_window(mlx, 1280, 1024, "Hello world!");
-	// mlx_loop(mlx);
+	draw_line(&env.screen, make_fvec2(0, 0), make_fvec2(100, 100), 0xFF0000, 0xFF);
+	
+	flush_screen(&env);
+	
+	mlx_loop(env.mlx);
 }

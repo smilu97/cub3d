@@ -9,6 +9,7 @@
         "__split_buffer": "c",
         "vector": "c",
         "string": "c",
-        "util.h": "c"
+        "util.h": "c",
+        "mlx.h": "c"
     }
 }
